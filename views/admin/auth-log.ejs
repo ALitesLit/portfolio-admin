@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>История входов</h1>
+
+    <a
+        href="/admin"
+        class="btn btn-outline-secondary"
+        title="Назад"
+    >
+        <img src="/static/icons/back.svg" alt="">
+    </a>
+</div>
+
+<% if (!logs || logs.length === 0) { %>
+    <div class="alert alert-secondary">
+        История входов пуста
+    </div>
+<% } else { %>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Имя</th>
+                    <th>IP</th>
+                    <th>Результат</th>
+                    <th>Причина</th>
+                    <th>User-Agent</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% logs.forEach(log => { %>
+                    <tr>
+                        <td>
+                            <%= new Date(log.created).toLocaleString("ru-RU") %>
+                        </td>
+
+                        <td>
+                            <%= log.name || "—" %>
+                        </td>
+
+                        <td>
+                            <%= log.ip || "—" %>
+                        </td>
+
+                        <td>
+                            <% if (log.success) { %>
+                                Успех
+                            <% } else { %>
+                                Отказ
+                            <% } %>
+                        </td>
+
+                        <td>
+                            <%= log.reason || "—" %>
+                        </td>
+
+                        <td
+                            class="text-truncate"
+                            style="max-width: 300px;"
+                        >
+                            <%= log.useragent || log.userAgent || "—" %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>

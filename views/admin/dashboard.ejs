@@ -1,0 +1,75 @@
+<div class="mb-4">
+    <h1>Панель управления</h1>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6 col-xl-4">
+        <a
+            href="/admin/projects"
+            class="text-decoration-none"
+        >
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Проекты</h5>
+                    <p class="card-text fs-2"><%= counts.projects %></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+        <a
+            href="/admin/categories"
+            class="text-decoration-none"
+        >
+            <div class="card text-white bg-success h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Категории</h5>
+                    <p class="card-text fs-2"><%= counts.categories %></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+        <a
+            href="/admin/sertifies"
+            class="text-decoration-none"
+        >
+            <div class="card bg-warning text-dark h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Сертификаты</h5>
+                    <p class="card-text fs-2"><%= counts.sertifies %></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+        <a
+            href="/admin/skills"
+            class="text-decoration-none"
+        >
+            <div class="card text-white bg-danger h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Навыки</h5>
+                    <p class="card-text fs-2"><%= counts.skills %></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-xl-4">
+        <a
+            href="/admin/social"
+            class="text-decoration-none"
+        >
+            <div class="card text-white bg-info h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Социальные сети</h5>
+                    <p class="card-text fs-2"><%= counts.social %></p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

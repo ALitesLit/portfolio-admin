@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white m-0">Соцсети</h2>
+    <a href="/admin/social/new" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Добавить
+    </a>
+</div>
+
+<% if (social.length === 0) { %>
+    <div class="alert alert-secondary">Соцсетей пока нет</div>
+<% } else { %>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Иконка</th>
+                    <th>Название</th>
+                    <th>Ссылка</th>
+                    <th class="text-end">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% social.forEach(s => { %>
+                    <tr>
+                        <td>
+                            <% if (s.photo) { %>
+                                <img src="<%= s.photo %>" alt="" style="max-height: 32px; max-width: 32px;">
+                            <% } %>
+                        </td>
+                        <td><%= s.name %></td>
+                        <td>
+                            <% if (s.site) { %>
+                                <a href="<%= s.site %>" target="_blank" rel="noopener noreferrer">
+                                    <%= s.site %>
+                                </a>
+                            <% } %>
+                        </td>
+                        <td class="text-end">
+                            <a href="/admin/social/<%= s.id %>/edit" class="btn btn-sm btn-outline-light">
+                                <span class="material-icons">edit</span>
+                            </a>
+                            <form method="POST" action="/admin/social/<%= s.id %>/delete" class="d-inline">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>

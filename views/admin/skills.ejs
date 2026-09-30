@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white m-0">Навыки</h2>
+    <a href="/admin/skills/new" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Добавить
+    </a>
+</div>
+
+<% if (skills.length === 0) { %>
+    <div class="alert alert-secondary">Навыков пока нет</div>
+<% } else { %>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Категория</th>
+                    <th>Важность</th>
+                    <th class="text-end">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% skills.forEach(skill => { %>
+                    <tr>
+                        <td><%= skill.name %></td>
+                        <td><%= skill.category_name %></td>
+                        <td><%= skill.importance %></td>
+                        <td class="text-end">
+                            <a href="/admin/skills/<%= skill.id %>/edit" class="btn btn-sm btn-outline-light">
+                                <span class="material-icons">edit</span>
+                            </a>
+                            <form method="POST" action="/admin/skills/<%= skill.id %>/delete" class="d-inline">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <span class="material-icons">delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<% } %>

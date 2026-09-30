@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white m-0"><%= sertify ? 'Редактировать сертификат' : 'Новый сертификат' %></h2>
+
+    <a href="/admin/sertifies" class="btn btn-outline-light">
+        <span class="material-icons align-middle">arrow_back</span>
+        Назад
+    </a>
+</div>
+
+<% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form
+    method="POST"
+    action="<%= sertify ? '/admin/sertifies/' + sertify.id : '/admin/sertifies/new' %>"
+    enctype="multipart/form-data"
+>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+
+        <input
+            type="text"
+            name="name"
+            class="form-control"
+            value="<%= sertify ? sertify.name : '' %>"
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ссылка</label>
+
+        <input
+            type="url"
+            name="site"
+            class="form-control"
+            value="<%= sertify ? sertify.site || '' : '' %>"
+            placeholder="https://"
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Изображение сертификата</label>
+
+        <input
+            type="file"
+            name="photo"
+            class="form-control"
+            accept=".png,.svg,image/png,image/svg+xml"
+            <%= sertify ? '' : 'required' %>
+        >
+    </div>
+
+    <% if (sertify && sertify.photo) { %>
+        <div class="mb-3">
+            <img
+                src="<%= sertify.photo %>"
+                alt=""
+                style="max-width: 500px; max-height: 350px;"
+            >
+        </div>
+    <% } %>
+
+    <button type="submit" class="btn btn-primary">
+        Сохранить
+    </button>
+</form>

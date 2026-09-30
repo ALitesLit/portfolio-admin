@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white m-0"><%= project ? 'Редактировать проект' : 'Новый проект' %></h2>
+
+    <a href="/admin/projects" class="btn btn-outline-light">
+        <span class="material-icons align-middle">arrow_back</span>
+        Назад
+    </a>
+</div>
+
+<% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form method="POST" action="<%= project ? '/admin/projects/' + project.id : '/admin/projects/new' %>">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input
+            type="text"
+            name="name"
+            class="form-control"
+            value="<%= project ? project.name : '' %>"
+            required
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Краткое описание</label>
+        <textarea
+            name="short_deskription"
+            rows="2"
+            class="form-control"
+        ><%= project ? project.short_deskription || '' : '' %></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Описание</label>
+        <textarea
+            name="deskription"
+            rows="5"
+            class="form-control"
+        ><%= project ? project.deskription || '' : '' %></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ссылка</label>
+        <input
+            type="url"
+            name="site"
+            class="form-control"
+            value="<%= project ? project.site || '' : '' %>"
+            placeholder="https://"
+        >
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Важность</label>
+        <input
+            type="number"
+            name="importance"
+            class="form-control"
+            value="<%= project ? project.importance : 0 %>"
+            min="0"
+        >
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Сохранить
+    </button>
+</form>
